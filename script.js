@@ -12,12 +12,13 @@ function generateQR() {
     }
 
     // Generate QR Code
-    QRCode.toCanvas(qrCodeContainer, data, function (error) {
+    QRCode.toCanvas(data, { errorCorrectionLevel: 'H' }, function (error, canvas) {
         if (error) {
             console.error(error);
             alert("Failed to generate QR code: " + error.message);
         } else {
             console.log('QR code generated!');
+            qrCodeContainer.appendChild(canvas);
         }
     });
 }
