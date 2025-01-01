@@ -5,13 +5,19 @@ function generateQR() {
     // Clear previous QR Code
     qrCodeContainer.innerHTML = '';
 
+    // Check if the data exceeds 2048 bytes
     if (new TextEncoder().encode(data).length > 2048) {
         alert("Data exceeds 2048 bytes limit.");
         return;
     }
 
-    QRCode.toCanvas(document.getElementById('qrcode'), data, function (error) {
-        if (error) console.error(error);
-        console.log('QR code generated!');
+    // Generate QR Code
+    QRCode.toCanvas(qrCodeContainer, data, function (error) {
+        if (error) {
+            console.error(error);
+            alert("Failed to generate QR code: " + error.message);
+        } else {
+            console.log('QR code generated!');
+        }
     });
 }
